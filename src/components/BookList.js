@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import "./BookList.css";
 
-function BookList() {
+function BookList(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedBooks, setLoadedBooks] = useState([]);
 
@@ -14,7 +14,8 @@ function BookList() {
       .then((data) => {
         setIsLoading(false);
         setLoadedBooks(data);
-      });
+      })
+      .then((e) => console.log(e));
   }
 
   useEffect(() => {
@@ -27,6 +28,11 @@ function BookList() {
     return () => clearInterval(interval);
   }, []);
 
+  if (props.dataChanged) {
+    getBooks();
+    props.onListUpdated();
+  }
+
   if (isLoading) {
     return (
       <Spinner animation="border" role="status">
@@ -36,7 +42,7 @@ function BookList() {
   }
 
   function dataChangedHandler(dataChanged) {
-    if(dataChanged) {
+    if (dataChanged) {
       getBooks();
     }
   }

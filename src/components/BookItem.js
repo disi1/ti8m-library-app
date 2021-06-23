@@ -8,23 +8,9 @@ function BookItem(props) {
   const [editModalShow, setEditModalShow] = useState(false);
   const [confirmationModalShow, setConfirmationModalShow] = useState(false);
 
-  function editConfirmHandler(editConfirmed, bookData) {
-    if (editConfirmed) {
-      fetch(
-        `https://5ffda94cd9ddad0017f68545.mockapi.io/books/${bookData.id}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(bookData),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => response.json())
-        .then(() => {
-          props.onDataChanged(true);
-        })
-        .catch((e) => console.log(e));
+  function dataChangedHandler(dataChanged) {
+    if (dataChanged) {
+      props.onDataChanged(true);
     } else {
       props.onDataChanged(false);
     }
@@ -67,8 +53,8 @@ function BookItem(props) {
       <AddEditModal
         show={editModalShow}
         onHide={() => setEditModalShow(false)}
-        onConfirm={editConfirmHandler}
-        addEditType="Edit"
+        onDataChanged={dataChangedHandler}
+        addEditModalType="Edit"
         id={props.id}
         title={props.title}
         author={props.author}

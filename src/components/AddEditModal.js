@@ -18,26 +18,47 @@ function AddEditModal(props) {
       pages: pagesInputRef.current.value,
       total_amount: amountInputRef.current.value,
     };
-    props.onConfirm(true, bookData);
-    props.onHide();
+
+    let url = "https://5ffda94cd9ddad0017f68545.mockapi.io/books";
+    let method = "POST";
+
+    if (props.addEditModalType === "Edit") {
+      url = `https://5ffda94cd9ddad0017f68545.mockapi.io/books/${bookData.id}`;
+      method = "PUT";
+    }
+
+    fetch(url, {
+      method,
+      body: JSON.stringify(bookData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then(() => {
+        props.onDataChanged(true);
+        props.onHide();
+      })
+      .catch((e) => console.log(e));
   }
 
   function cancelAction() {
-    props.onConfirm(false);
+    props.onDataChanged(false);
     props.onHide();
   }
 
   return (
     <Modal
-      {...props}
+      show={props.show}
+      onHide={props.onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {props.addEditType === "Add" ? "Add" : "Edit"}
-          {props.title ? ` ${props.title}` : ""}
+          {props.addEditModalType === "Add" ? "Add Book" : "Edit"}
+          {props.title ? ` "${props.title}"` : ""}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
