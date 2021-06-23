@@ -35,6 +35,12 @@ function BookList() {
     );
   }
 
+  function dataChangedHandler(dataChanged) {
+    if(dataChanged) {
+      getBooks();
+    }
+  }
+
   return (
     <CardDeck className="book-container justify-content-center">
       {loadedBooks.map((book) => (
@@ -46,6 +52,7 @@ function BookList() {
           isbn={book.isbn}
           pages={book.pages}
           total_amount={book.total_amount}
+          onDataChanged={dataChangedHandler}
         />
       ))}
     </CardDeck>
