@@ -3,17 +3,18 @@ import { useState } from "react";
 
 import "./BookItem.css";
 import AddEditModal from "./AddEditModal";
+import ConfirmationModal from "./ConfirmationModal";
 
 function BookItem(props) {
   const [editModalShow, setEditModalShow] = useState(false);
   const [confirmationModalShow, setConfirmationModalShow] = useState(false);
 
-  function dataChangedHandler(dataChanged) {
-    if (dataChanged) {
-      props.onDataChanged(true);
-    } else {
-      props.onDataChanged(false);
-    }
+  function deleteBookHandler(dataChanged) {
+    props.onBookDelete(dataChanged);
+  }
+
+  function editBookHandler(dataChanged) {
+    props.onBookEdit(dataChanged);
   }
 
   return (
@@ -53,7 +54,7 @@ function BookItem(props) {
       <AddEditModal
         show={editModalShow}
         onHide={() => setEditModalShow(false)}
-        onDataChanged={dataChangedHandler}
+        onBookEdit={editBookHandler}
         addEditModalType="Edit"
         id={props.id}
         title={props.title}
@@ -61,6 +62,15 @@ function BookItem(props) {
         isbn={props.isbn}
         pages={props.pages}
         total_amount={props.total_amount}
+      />
+
+      <ConfirmationModal
+        show={confirmationModalShow}
+        onHide={() => setConfirmationModalShow(false)}
+        onBookDelete={deleteBookHandler}
+        confirmationType="Delete"
+        title={props.title}
+        id={props.id}
       />
     </div>
   );

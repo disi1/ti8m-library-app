@@ -6,12 +6,8 @@ import AddEditModal from "./AddEditModal";
 function Navigation(props) {
   const [addEditModalShow, setAddEditModalShow] = useState(false);
 
-  function dataChangedHandler(dataChanged) {
-    if (dataChanged) {
-      props.onDataChanged(true);
-    } else {
-      props.onDataChanged(false);
-    }
+  function addBookHandler(dataChanged) {
+      props.onBookAdd(dataChanged);
   }
 
   return (
@@ -27,7 +23,7 @@ function Navigation(props) {
         show={addEditModalShow}
         onHide={() => setAddEditModalShow(false)}
         addEditModalType="Add"
-        onDataChanged={dataChangedHandler}
+        onBookAdd={addBookHandler}
       />
     </Navbar>
   );

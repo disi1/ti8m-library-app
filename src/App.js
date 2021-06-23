@@ -3,23 +3,16 @@ import Navigation from "./components/Navigation";
 import { useState } from "react";
 
 function App() {
-  const [dataChanged, setDataChanged] = useState(false);
+  const [bookAdded, setBookAdded] = useState(false);
 
-  function dataChangedHandler(dataChanged) {
-    setDataChanged(dataChanged);
-  }
-
-  function listUpToDatedHandler() {
-    setDataChanged(false);
+  function addBookdHandler(dataHasChanged) {
+    setBookAdded(dataHasChanged);
   }
 
   return (
     <div className="App">
-      <Navigation onDataChanged={dataChangedHandler} />
-      <BookList
-        dataChanged={dataChanged}
-        onListUpdated={listUpToDatedHandler}
-      />
+      <Navigation onBookAdd={addBookdHandler} />
+      <BookList bookAdded={bookAdded} onBookAdd={addBookdHandler} />
     </div>
   );
 }
