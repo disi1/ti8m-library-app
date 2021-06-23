@@ -3,31 +3,18 @@ import { useState } from "react";
 
 import "./BookItem.css";
 import AddEditModal from "./AddEditModal";
+import ConfirmationModal from "./ConfirmationModal";
 
 function BookItem(props) {
   const [editModalShow, setEditModalShow] = useState(false);
   const [confirmationModalShow, setConfirmationModalShow] = useState(false);
 
-  function editConfirmHandler(editConfirmed, bookData) {
-    if (editConfirmed) {
-      fetch(
-        `https://5ffda94cd9ddad0017f68545.mockapi.io/books/${bookData.id}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(bookData),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => response.json())
-        .then(() => {
-          props.onDataChanged(true);
-        })
-        .catch((e) => console.log(e));
-    } else {
-      props.onDataChanged(false);
-    }
+  function deleteBookHandler(dataChanged) {
+    props.onBookDelete(dataChanged);
+  }
+
+  function editBookHandler(dataChanged) {
+    props.onBookEdit(dataChanged);
   }
 
   return (
@@ -67,14 +54,23 @@ function BookItem(props) {
       <AddEditModal
         show={editModalShow}
         onHide={() => setEditModalShow(false)}
-        onConfirm={editConfirmHandler}
-        addEditType="Edit"
+        onBookEdit={editBookHandler}
+        addEditModalType="Edit"
         id={props.id}
         title={props.title}
         author={props.author}
         isbn={props.isbn}
         pages={props.pages}
         total_amount={props.total_amount}
+      />
+
+      <ConfirmationModal
+        show={confirmationModalShow}
+        onHide={() => setConfirmationModalShow(false)}
+        onBookDelete={deleteBookHandler}
+        confirmationType="Delete"
+        title={props.title}
+        id={props.id}
       />
     </div>
   );

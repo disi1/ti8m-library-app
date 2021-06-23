@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 
 import "./BookList.css";
 
-function BookList() {
+function BookList(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedBooks, setLoadedBooks] = useState([]);
+  const [editBookDataChanged, setEditBookDataChanged] = useState(false);
+  const [deleteBookDataChanged, setDeleteBookDataChanged] = useState(false);
 
   function getBooks() {
     fetch("https://5ffda94cd9ddad0017f68545.mockapi.io/books")
@@ -14,7 +16,8 @@ function BookList() {
       .then((data) => {
         setIsLoading(false);
         setLoadedBooks(data);
-      });
+      })
+      .then((e) => console.log(e));
   }
 
   useEffect(() => {
@@ -27,18 +30,35 @@ function BookList() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (props.bookAdded) {
+      getBooks();
+      props.onBookAdd(false);
+    }
+    if (editBookDataChanged) {
+      getBooks();
+      setEditBookDataChanged(false);
+    }
+    if (deleteBookDataChanged) {
+      getBooks();
+      setDeleteBookDataChanged(false);
+    }
+  }, [editBookDataChanged, deleteBookDataChanged, props]);
+
+  function editBookHandler(dataHasChanged) {
+    setEditBookDataChanged(dataHasChanged);
+  }
+
+  function deleteBookHandler(dataHasChanged) {
+    setDeleteBookDataChanged(dataHasChanged);
+  }
+
   if (isLoading) {
     return (
       <Spinner animation="border" role="status">
         <span className="sr-only">Loading...</span>
       </Spinner>
     );
-  }
-
-  function dataChangedHandler(dataChanged) {
-    if(dataChanged) {
-      getBooks();
-    }
   }
 
   return (
@@ -52,7 +72,8 @@ function BookList() {
           isbn={book.isbn}
           pages={book.pages}
           total_amount={book.total_amount}
-          onDataChanged={dataChangedHandler}
+          onBookEdit={editBookHandler}
+          onBookDelete={deleteBookHandler}
         />
       ))}
     </CardDeck>
