@@ -8,7 +8,7 @@ function BookItem(props) {
   const [confirmationModalShow, setConfirmationModalShow] = useState(false);
 
   return (
-    <div className="book-card">
+    <div className="text-center text-black book-card col-md-4 d-flex">
       <Card bg="light">
         <Card.Header>
           <Card.Title>{props.title}</Card.Title>
