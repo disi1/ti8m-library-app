@@ -20,6 +20,11 @@ function BookList() {
   useEffect(() => {
     setIsLoading(true);
     getBooks();
+    const interval = setInterval(() => {
+      getBooks();
+    }, 60000);
+
+    return () => clearInterval(interval);
   }, []);
 
   if (isLoading) {
