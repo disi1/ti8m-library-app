@@ -1,7 +1,18 @@
 import BookForm from "./BookForm";
 import { Modal } from "react-bootstrap";
 
+/**
+ * Holds the Modal with a Form to add a new book
+ * On receiving back the necessary data, a POST request is launched
+ * @param {Object} props
+ * @returns {Modal}
+ */
 function AddBookModal(props) {
+  /**
+   * On receiving data back from Modal, launches a POST request
+   * On success, executes callback function sent through props
+   * @param {Object} data
+   */
   function dataReceivedHandler(data) {
     fetch("https://5ffda94cd9ddad0017f68545.mockapi.io/books", {
       method: "POST",
@@ -10,10 +21,11 @@ function AddBookModal(props) {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => response.json())
-      .then(() => {
-        props.onBookAdded(true);
-        props.onHide();
+      .then((response) => {
+        if (response.status === 201) {
+          props.onBookAdded(true);
+          props.onHide();
+        }
       })
       .catch((e) => console.log(e));
   }
@@ -31,10 +43,10 @@ function AddBookModal(props) {
       </Modal.Header>
       <Modal.Body>
         <BookForm
+          data={{}}
           modalType="Add"
           onDataReceived={dataReceivedHandler}
           onHide={() => props.onHide()}
-          data={{}}
         />
       </Modal.Body>
     </Modal>

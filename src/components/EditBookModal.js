@@ -1,7 +1,19 @@
 import BookForm from "./BookForm";
 import { Modal } from "react-bootstrap";
 
+/**
+ * Holds the Modal with a Form which receives through props the details of the book to edit
+ * On receiving back the necessary data, a PUT request is launched
+ * @param {Object} props
+ * @returns {Modal}
+ */
 function EditBookModal(props) {
+  /**
+   * On receiving data back from Modal, launches a PUT request
+   * On success, executes callback function sent through props
+   * that the data should be refetched
+   * @param {Object} data
+   */
   function dataReceivedHandler(data) {
     fetch(`https://5ffda94cd9ddad0017f68545.mockapi.io/books/${data.id}`, {
       method: "PUT",
@@ -10,10 +22,11 @@ function EditBookModal(props) {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => response.json())
-      .then(() => {
-        props.onBookEdited(true);
-        props.onHide();
+      .then((response) => {
+        if (response.status === 200) {
+          props.onBookEdited(true);
+          props.onHide();
+        }
       })
       .catch((e) => console.log(e));
   }
@@ -27,14 +40,17 @@ function EditBookModal(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">{`Edit "${props.title}"`}</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Edit
+          <cite title="Source Title"> {props.data.title}</cite>
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <BookForm
+          data={props.data}
           modalType="Edit"
           onDataReceived={dataReceivedHandler}
           onHide={() => props.onHide()}
-          data={props.data}
         />
       </Modal.Body>
     </Modal>

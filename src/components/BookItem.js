@@ -6,14 +6,16 @@ import EditBookModal from "./EditBookModal";
 import ConfirmationModal from "./ConfirmationModal";
 
 function BookItem(props) {
-  const [editModalShow, setEditModalShow] = useState(false);
-  const [confirmationModalShow, setConfirmationModalShow] = useState(false);
+  const [editModalShow, setEditModalShow] = useState();
+  const [confirmationModalShow, setConfirmationModalShow] = useState();
 
   return (
-    <div className="text-center text-black book-card col-md-4 d-flex">
+    <div className="text-center text-black book-card col-md-4">
       <Card bg="light">
         <Card.Header>
-          <Card.Title>{props.data.title}</Card.Title>
+          <Card.Title>
+            {props.data.title}
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <Card.Subtitle>{props.data.author}</Card.Subtitle>
@@ -44,19 +46,19 @@ function BookItem(props) {
       </Card>
 
       <EditBookModal
+        data={props.data}
         show={editModalShow}
         onHide={() => setEditModalShow(false)}
         onBookEdited={props.onBookEdited}
-        data={props.data}
       />
 
       <ConfirmationModal
+        title={props.data.title}
+        id={props.data.id}
+        confirmationType="Delete"
         show={confirmationModalShow}
         onHide={() => setConfirmationModalShow(false)}
         onBookDeleted={props.onBookDeleted}
-        confirmationType="Delete"
-        title={props.data.title}
-        id={props.data.id}
       />
     </div>
   );

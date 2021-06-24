@@ -1,19 +1,21 @@
 .book-card {
-    margin: 20px;
-    max-width: 400px;
-}
-
-.actions {
-    display: flex;
-    justify-content: space-between;
-}
-
-.actions > button {
-    width: 80px;
-    margin: 10px;
-    max-height: 38px;
+  margin: 20px 0;
+  max-width: 400px;
+  min-width: 300px;
 }
 
 .card-title {
-    min-height: 48px;
+  min-height: 48px;
 }
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions > button {
+  width: 80px;
+  margin: 10px;
+  max-height: 38px;
+}
+

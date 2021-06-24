@@ -2,6 +2,11 @@ import { Form, Button } from "react-bootstrap";
 import { useRef } from "react";
 import "./BookForm.css";
 
+/**
+ * Holds the Form which displays the necessary fields to add or edit a book
+ * @param {Object} props 
+ * @returns {Form}
+ */
 function BookForm(props) {
   const titleInputRef = useRef();
   const authorInputRef = useRef();
@@ -9,6 +14,11 @@ function BookForm(props) {
   const pagesInputRef = useRef();
   const isbnInputRef = useRef();
 
+  /**
+   * On form submit, checks for valid input on required fields
+   * If confirmed, continues with confirmAction()
+   * @param {Object} event 
+   */
   function handleSubmit(event) {
     const form = event.currentTarget;
 
@@ -22,6 +32,9 @@ function BookForm(props) {
     }
   }
 
+  /**
+   * On confirmation and validation received, executes callback function sent through props using data gathered from inputs
+   */
   function confirmAction() {
     const bookData = {
       id: props.data.id,
@@ -35,6 +48,9 @@ function BookForm(props) {
     props.onDataReceived(bookData);
   }
 
+  /**
+   * On confirmation denied, the modal is hidden and no other action is taken
+   */
   function cancelAction() {
     props.onHide();
   }
@@ -88,6 +104,7 @@ function BookForm(props) {
           ref={amountInputRef}
         />
       </Form.Group>
+      {/* Generating Button and Button text depending on modalType */}
       <Button type="submit">{`${
         props.modalType === "Add" ? "Add book" : "Save changes"
       }`}</Button>
