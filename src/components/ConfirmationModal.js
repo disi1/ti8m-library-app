@@ -37,7 +37,7 @@ function ConfirmationModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton style={{ backgroundColor: "#e8f5e9" }}>
         <Modal.Title id="contained-modal-title-vcenter">
           {props.confirmationType} Book
         </Modal.Title>
@@ -46,7 +46,8 @@ function ConfirmationModal(props) {
       <Modal.Body>
         <p>
           {confirmationMsg}
-          <b>"{props.title}"</b>?
+          {/* <b>"{props.title}"</b>? */}
+          <cite title={props.title}>{props.title}</cite> ?
         </p>
       </Modal.Body>
       <Modal.Footer>

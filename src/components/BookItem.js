@@ -11,11 +11,9 @@ function BookItem(props) {
 
   return (
     <div className="text-center text-black book-card col-md-4">
-      <Card bg="light">
-        <Card.Header>
-          <Card.Title>
-            {props.data.title}
-          </Card.Title>
+      <Card bg="light" border="light">
+        <Card.Header style={{ backgroundColor: "#b5c1b9" }}>
+          <Card.Title>{props.data.title}</Card.Title>
         </Card.Header>
         <Card.Body>
           <Card.Subtitle>{props.data.author}</Card.Subtitle>
@@ -26,7 +24,7 @@ function BookItem(props) {
         </Card.Body>
         <Card.Body className="actions">
           <Button
-            variant="outline-secondary"
+            variant="outline-dark"
             onClick={() => setEditModalShow(true)}
           >
             Edit
@@ -38,8 +36,8 @@ function BookItem(props) {
             Delete
           </Button>
         </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">
+        <Card.Footer style={{ backgroundColor: "#b5c1b9" }}>
+          <small>
             {props.data.pages} pages | {props.data.total_amount} items
           </small>
         </Card.Footer>

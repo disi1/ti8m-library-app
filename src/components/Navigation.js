@@ -12,16 +12,16 @@ function Navigation(props) {
   const [addModalShow, setAddModalShow] = useState();
 
   return (
-    <Navbar bg="light" variant="light" sticky="top">
+    <Navbar
+      variant="light"
+      sticky="top"
+      style={{ backgroundColor: "#e8f5e9" }}
+    >
       <Navbar.Brand as={Link} to="/">
         Bookshelf
       </Navbar.Brand>
       <Nav.Item className="ml-auto">
-        <Button
-          variant="primary"
-          onClick={() => setAddModalShow(true)}
-          className="extend-button"
-        >
+        <Button variant="dark" onClick={() => setAddModalShow(true)}>
           + New Book
         </Button>
       </Nav.Item>

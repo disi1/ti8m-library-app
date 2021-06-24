@@ -4,7 +4,7 @@ import "./BookForm.css";
 
 /**
  * Holds the Form which displays the necessary fields to add or edit a book
- * @param {Object} props 
+ * @param {Object} props
  * @returns {Form}
  */
 function BookForm(props) {
@@ -17,7 +17,7 @@ function BookForm(props) {
   /**
    * On form submit, checks for valid input on required fields
    * If confirmed, continues with confirmAction()
-   * @param {Object} event 
+   * @param {Object} event
    */
   function handleSubmit(event) {
     const form = event.currentTarget;
@@ -62,6 +62,7 @@ function BookForm(props) {
         <Form.Control
           required
           type="text"
+          maxLength={80}
           placeholder="Enter the book title"
           defaultValue={props.data.title}
           ref={titleInputRef}
@@ -72,6 +73,7 @@ function BookForm(props) {
         <Form.Control
           required
           type="text"
+          maxLength={40}
           placeholder="Enter the author's name"
           defaultValue={props.data.author}
           ref={authorInputRef}
@@ -81,6 +83,7 @@ function BookForm(props) {
         <Form.Label>ISBN</Form.Label>
         <Form.Control
           type="text"
+          maxLength={13}
           placeholder="Enter the International Standard Book Number"
           defaultValue={props.data.isbn}
           ref={isbnInputRef}
@@ -90,6 +93,7 @@ function BookForm(props) {
         <Form.Label>Pages</Form.Label>
         <Form.Control
           type="number"
+          max={10000}
           placeholder="Enter the number of pages"
           defaultValue={props.data.pages}
           ref={pagesInputRef}
@@ -99,13 +103,14 @@ function BookForm(props) {
         <Form.Label>Amount</Form.Label>
         <Form.Control
           type="number"
+          max={1000}
           placeholder="Enter the number of books in stock"
           defaultValue={props.data.total_amount}
           ref={amountInputRef}
         />
       </Form.Group>
       {/* Generating Button and Button text depending on modalType */}
-      <Button type="submit">{`${
+      <Button variant="dark" type="submit">{`${
         props.modalType === "Add" ? "Add book" : "Save changes"
       }`}</Button>
       <Button variant="link-secondary" onClick={cancelAction}>

@@ -39,9 +39,9 @@ function EditBookModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton style={{ backgroundColor: "#e8f5e9" }}>
         <Modal.Title id="contained-modal-title-vcenter">
-          Edit
+          Edit Book - 
           <cite title="Source Title"> {props.data.title}</cite>
         </Modal.Title>
       </Modal.Header>
