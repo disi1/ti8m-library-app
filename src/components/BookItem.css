@@ -1,5 +1,5 @@
 .book-card {
-    margin: 10px;
+    margin: 20px;
     max-width: 400px;
 }
 
@@ -11,4 +11,9 @@
 .actions > button {
     width: 80px;
     margin: 10px;
+    max-height: 38px;
+}
+
+.card-title {
+    min-height: 48px;
 }

@@ -8,7 +8,7 @@ function ConfirmationModal(props) {
       method: "DELETE",
     })
       .then((response) => {
-        if (response.status === 200) props.onBookDelete(true);
+        if (response.status === 200) props.onBookDeleted(true);
         props.onHide();
       })
       .catch((error) => console.log(error));

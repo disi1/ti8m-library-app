@@ -1,29 +1,24 @@
 import { Link } from "react-router-dom";
 import { Navbar, Button } from "react-bootstrap";
 import { useState } from "react";
-import AddEditModal from "./AddEditModal";
+import AddBookModal from "./AddBookModal";
 
 function Navigation(props) {
-  const [addEditModalShow, setAddEditModalShow] = useState(false);
-
-  function addBookHandler(dataChanged) {
-      props.onBookAdd(dataChanged);
-  }
+  const [addModalShow, setAddModalShow] = useState();
 
   return (
     <Navbar bg="light" variant="light">
       <Navbar.Brand as={Link} to="/">
         Bookshelf
       </Navbar.Brand>
-      <Button variant="primary" onClick={() => setAddEditModalShow(true)}>
+      <Button variant="primary" onClick={() => setAddModalShow(true)}>
         + New Book
       </Button>
 
-      <AddEditModal
-        show={addEditModalShow}
-        onHide={() => setAddEditModalShow(false)}
-        addEditModalType="Add"
-        onBookAdd={addBookHandler}
+      <AddBookModal
+        show={addModalShow}
+        onHide={() => setAddModalShow(false)}
+        onBookAdded={props.onBookAdded}
       />
     </Navbar>
   );
