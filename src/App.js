@@ -7,6 +7,10 @@ function App() {
    * Keeps track of whether the list of books should be refetched
    */
   const [listRefetch, setlistRefetch] = useState();
+
+  /**
+   * Keeps track of the filter applied by the user
+   */
   const [filter, setfilter] = useState("");
 
   function refetchListHandler(shouldRefetchList) {
@@ -19,8 +23,12 @@ function App() {
 
   return (
     <div className="App">
-      <Navigation onBookAdded={refetchListHandler} onFilter={filterHandler}/>
-      <BookList bookAdded={listRefetch} onListRefetch={refetchListHandler} filter={filter}/>
+      <Navigation onBookAdded={refetchListHandler} onFilter={filterHandler} />
+      <BookList
+        bookAdded={listRefetch}
+        onListRefetch={refetchListHandler}
+        filter={filter}
+      />
     </div>
   );
 }

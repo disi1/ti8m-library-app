@@ -8,6 +8,10 @@
   min-height: 48px;
 }
 
+.card-subtitle {
+  min-height: 38px;
+}
+
 .actions {
   display: flex;
   justify-content: space-between;
@@ -18,4 +22,3 @@
   margin: 10px;
   max-height: 38px;
 }
-

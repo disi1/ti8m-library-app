@@ -41,8 +41,7 @@ function EditBookModal(props) {
     >
       <Modal.Header closeButton style={{ backgroundColor: "#e8f5e9" }}>
         <Modal.Title id="contained-modal-title-vcenter">
-          Edit Book - 
-          <cite title="Source Title"> {props.data.title}</cite>
+          Edit Book -<cite title="Source Title"> {props.data.title} </cite>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

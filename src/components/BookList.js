@@ -7,6 +7,7 @@ import "./BookList.css";
 /**
  * Holds a deck of cards containing book items
  * Through useEffect, the list of books is fetched on opening the page and on state changes
+ * The list is filtered based on the filter received through props
  * @param {Object} props
  * @returns {CardDeck}
  */

@@ -94,6 +94,7 @@ function BookForm(props) {
         <Form.Control
           type="number"
           max={10000}
+          min={0}
           placeholder="Enter the number of pages"
           defaultValue={props.data.pages}
           ref={pagesInputRef}
@@ -104,6 +105,7 @@ function BookForm(props) {
         <Form.Control
           type="number"
           max={1000}
+          min={0}
           placeholder="Enter the number of books in stock"
           defaultValue={props.data.total_amount}
           ref={amountInputRef}
