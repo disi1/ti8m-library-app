@@ -1,29 +1,35 @@
 import { Link } from "react-router-dom";
-import { Navbar, Button } from "react-bootstrap";
+import { Navbar, Button, Nav } from "react-bootstrap";
 import { useState } from "react";
-import AddEditModal from "./AddEditModal";
+import AddBookModal from "./AddBookModal";
 
+/**
+ * Holds the name of the app, the button for the main action (adding a new Book) which launches the AddBookModal
+ * @param {Object} props
+ * @returns {Navbar}
+ */
 function Navigation(props) {
-  const [addEditModalShow, setAddEditModalShow] = useState(false);
-
-  function addBookHandler(dataChanged) {
-      props.onBookAdd(dataChanged);
-  }
+  const [addModalShow, setAddModalShow] = useState();
 
   return (
-    <Navbar bg="light" variant="light">
+    <Navbar
+      variant="light"
+      sticky="top"
+      style={{ backgroundColor: "#e8f5e9" }}
+    >
       <Navbar.Brand as={Link} to="/">
         Bookshelf
       </Navbar.Brand>
-      <Button variant="primary" onClick={() => setAddEditModalShow(true)}>
-        + New Book
-      </Button>
+      <Nav.Item className="ml-auto">
+        <Button variant="dark" onClick={() => setAddModalShow(true)}>
+          + New Book
+        </Button>
+      </Nav.Item>
 
-      <AddEditModal
-        show={addEditModalShow}
-        onHide={() => setAddEditModalShow(false)}
-        addEditModalType="Add"
-        onBookAdd={addBookHandler}
+      <AddBookModal
+        show={addModalShow}
+        onHide={() => setAddModalShow(false)}
+        onBookAdded={props.onBookAdded}
       />
     </Navbar>
   );

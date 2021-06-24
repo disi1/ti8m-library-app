@@ -2,37 +2,29 @@ import { Card, Button } from "react-bootstrap";
 import { useState } from "react";
 
 import "./BookItem.css";
-import AddEditModal from "./AddEditModal";
+import EditBookModal from "./EditBookModal";
 import ConfirmationModal from "./ConfirmationModal";
 
 function BookItem(props) {
-  const [editModalShow, setEditModalShow] = useState(false);
-  const [confirmationModalShow, setConfirmationModalShow] = useState(false);
-
-  function deleteBookHandler(dataChanged) {
-    props.onBookDelete(dataChanged);
-  }
-
-  function editBookHandler(dataChanged) {
-    props.onBookEdit(dataChanged);
-  }
+  const [editModalShow, setEditModalShow] = useState();
+  const [confirmationModalShow, setConfirmationModalShow] = useState();
 
   return (
-    <div className="text-center text-black book-card col-md-4 d-flex">
-      <Card bg="light">
-        <Card.Header>
-          <Card.Title>{props.title}</Card.Title>
+    <div className="text-center text-black book-card col-md-4">
+      <Card bg="light" border="light">
+        <Card.Header style={{ backgroundColor: "#b5c1b9" }}>
+          <Card.Title>{props.data.title}</Card.Title>
         </Card.Header>
         <Card.Body>
-          <Card.Subtitle>{props.author}</Card.Subtitle>
+          <Card.Subtitle>{props.data.author}</Card.Subtitle>
           <hr />
           <Card.Text>
-            <small className="text-muted">ISBN {props.isbn}</small>
+            <small className="text-muted">ISBN {props.data.isbn}</small>
           </Card.Text>
         </Card.Body>
         <Card.Body className="actions">
           <Button
-            variant="outline-secondary"
+            variant="outline-dark"
             onClick={() => setEditModalShow(true)}
           >
             Edit
@@ -44,33 +36,27 @@ function BookItem(props) {
             Delete
           </Button>
         </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">
-            {props.pages} pages | {props.total_amount} items
+        <Card.Footer style={{ backgroundColor: "#b5c1b9" }}>
+          <small>
+            {props.data.pages} pages | {props.data.total_amount} items
           </small>
         </Card.Footer>
       </Card>
 
-      <AddEditModal
+      <EditBookModal
+        data={props.data}
         show={editModalShow}
         onHide={() => setEditModalShow(false)}
-        onBookEdit={editBookHandler}
-        addEditModalType="Edit"
-        id={props.id}
-        title={props.title}
-        author={props.author}
-        isbn={props.isbn}
-        pages={props.pages}
-        total_amount={props.total_amount}
+        onBookEdited={props.onBookEdited}
       />
 
       <ConfirmationModal
+        title={props.data.title}
+        id={props.data.id}
+        confirmationType="Delete"
         show={confirmationModalShow}
         onHide={() => setConfirmationModalShow(false)}
-        onBookDelete={deleteBookHandler}
-        confirmationType="Delete"
-        title={props.title}
-        id={props.id}
+        onBookDeleted={props.onBookDeleted}
       />
     </div>
   );

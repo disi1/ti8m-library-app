@@ -3,16 +3,19 @@ import Navigation from "./components/Navigation";
 import { useState } from "react";
 
 function App() {
-  const [bookAdded, setBookAdded] = useState(false);
+  /**
+   * Keeps track of whether the list of books should be refetched
+   */
+  const [listRefetch, setlistRefetch] = useState();
 
-  function addBookdHandler(dataHasChanged) {
-    setBookAdded(dataHasChanged);
+  function refetchListHandler(shouldRefetchList) {
+    setlistRefetch(shouldRefetchList);
   }
 
   return (
     <div className="App">
-      <Navigation onBookAdd={addBookdHandler} />
-      <BookList bookAdded={bookAdded} onBookAdd={addBookdHandler} />
+      <Navigation onBookAdded={refetchListHandler} />
+      <BookList bookAdded={listRefetch} onListRefetch={refetchListHandler} />
     </div>
   );
 }
