@@ -8,14 +8,27 @@ function App() {
    */
   const [listRefetch, setlistRefetch] = useState();
 
+  /**
+   * Keeps track of the filter applied by the user
+   */
+  const [filter, setfilter] = useState("");
+
   function refetchListHandler(shouldRefetchList) {
     setlistRefetch(shouldRefetchList);
   }
 
+  function filterHandler(text) {
+    setfilter(text);
+  }
+
   return (
     <div className="App">
-      <Navigation onBookAdded={refetchListHandler} />
-      <BookList bookAdded={listRefetch} onListRefetch={refetchListHandler} />
+      <Navigation onBookAdded={refetchListHandler} onFilter={filterHandler} />
+      <BookList
+        bookAdded={listRefetch}
+        onListRefetch={refetchListHandler}
+        filter={filter}
+      />
     </div>
   );
 }
