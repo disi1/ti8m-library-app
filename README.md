@@ -10,7 +10,7 @@ The project is a front-end built with React.js which communicates through a REST
 
 ## What can I do with it?
 
-1. Add new books - provide a title (required), author (required), ISBN, and the number of copies you own
+1. Add new books - provide a title (required), author (required), ISBN, the number of pages and the number of copies you own
 1. See all existing books
 1. Edit books - change anything about a book entry
 1. Delete books
@@ -19,7 +19,7 @@ The project is a front-end built with React.js which communicates through a REST
 ## How can I run it?
 You can check out the deployed front-end at https://ti8m-library-app.vercel.app/
 
-Alternatively, if you want to see the code in action, check out this get repository, then run `npm start` or `yarn start`. 
+Alternatively, if you want to see the code in action, check out this git repository, then run `npm start` or `yarn start`. 
 
 #### `npm start` or `yarn start`
 
