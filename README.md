@@ -17,9 +17,7 @@ The project is a front-end built with React.js which communicates through a REST
 1. Search and filter the list of books by its title or author
 
 ## How can I run it?
-You can check out the deployed front-end at https://ti8m-library-app.vercel.app/
-
-Alternatively, if you want to see the code in action, check out this git repository, then run `npm start` or `yarn start`. 
+If you want to see the code in action, check out this git repository, then run `npm start` or `yarn start`. 
 
 #### `npm start` or `yarn start`
 
